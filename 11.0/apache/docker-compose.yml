@@ -1,0 +1,18 @@
+version: '2'
+services:
+  app:
+    image: nextcloud-docker-apache
+    ports: 
+        - 80:80
+    container_name: nextcloud-docker-apache
+    volumes:
+#      - ./apps:/var/www/html/custom_apps
+#      - ./config:/var/www/html/config
+      - ./data:/var/www/html/data
+    networks:
+      - bridge
+
+networks:
+    bridge:
+        external:
+            name: app
