@@ -9,8 +9,10 @@ services:
 #      - ./apps:/var/www/html/custom_apps
 #      - ./config:/var/www/html/config
       - ./data:/var/www/html/data
+    environment:
+        - BASE_PATH=/nextcloud
     networks:
-      - bridge
+        - bridge
 
 networks:
     bridge:
