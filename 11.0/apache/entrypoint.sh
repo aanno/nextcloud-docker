@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 set -e
 
 export BASE="/var/www/html"
