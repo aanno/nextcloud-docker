@@ -117,6 +117,7 @@ RUN set -ex; \
 
 COPY *.sh /
 COPY config/* /usr/src/nextcloud/config/
+COPY 000-default.conf /etc/apache2/sites-available/
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
