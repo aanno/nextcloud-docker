@@ -4,7 +4,7 @@
 version: '2'
 services:
   app:
-    image: aanno/nextcloud:11.0.5-apache
+    image: aanno/nextcloud:13.0.0-apache
     ports: 
         - 80:80
     container_name: nextcloud-docker-apache
