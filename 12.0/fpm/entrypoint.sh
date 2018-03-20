@@ -1,6 +1,12 @@
 #!/bin/sh
 set -eu
 
+export BASE="/var/www/html"
+if [ -n $BASE_PATH ]; then
+    export BASE="${BASE}${BASE_PATH}"
+fi
+mkdir -p "${BASE}"
+
 # version_greater A B returns whether A > B
 version_greater() {
 	[ "$(printf '%s\n' "$@" | sort -t '.' -n -k1,1 -k2,2 -k3,3 -k4,4 | head -n 1)" != "$1" ]
@@ -14,15 +20,19 @@ directory_empty() {
 run_as() {
   if [ "$(id -u)" = 0 ]; then
     su - www-data -s /bin/sh -c "$1"
+# su - www-data -s /bin/bash <<EOSU
+# $1
+# EOSU
   else
     sh -c "$1"
   fi
 }
 
 installed_version="0.0.0.0"
-if [ -f /var/www/html/version.php ]; then
+if [ -f ${BASE}/version.php ]; then
     # shellcheck disable=SC2016
-    installed_version="$(php -r 'require "/var/www/html/version.php"; echo implode(".", $OC_Version);')"
+    # installed_version=$(php -r 'require "'${BASE}'/version.php"; echo "$OC_VersionString";')
+    installed_version=$(php -r 'require "'${BASE}'/version.php"; echo implode(".", $OC_Version);')
 fi
 # shellcheck disable=SC2016
 image_version="$(php -r 'require "/usr/src/nextcloud/version.php"; echo implode(".", $OC_Version);')"
@@ -34,25 +44,31 @@ fi
 
 if version_greater "$image_version" "$installed_version"; then
     if [ "$installed_version" != "0.0.0.0" ]; then
-        run_as 'php /var/www/html/occ app:list' | sed -n "/Enabled:/,/Disabled:/p" > /tmp/list_before
+        # run_as 'php '${BASE}'/occ app:list' > /tmp/list_before
+        run_as 'php '${BASE}'/occ app:list' | sed -n "/Enabled:/,/Disabled:/p" > /tmp/list_before
     fi
     if [ "$(id -u)" = 0 ]; then
       rsync_options="-rlDog --chown www-data:root"
     else
       rsync_options="-rlD"
     fi
-    rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
+    rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ "$BASE"
 
     for dir in config data custom_apps themes; do
-        if [ ! -d "/var/www/html/$dir" ] || directory_empty "/var/www/html/$dir"; then
-            rsync $rsync_options --include "/$dir/" --exclude '/*' /usr/src/nextcloud/ /var/www/html/
+        # if [ ! -d ${BASE}/"$dir" ] || directory_empty ${BASE}/"$dir"; then
+        #     rsync $rsync_options --include /"$dir"/ --exclude '/*' /usr/src/nextcloud/ "$BASE"
+        if [ ! -d ${BASE}/"$dir" ] || directory_empty ${BASE}/"$dir"; then
+            rsync $rsync_options --include /"$dir"/ --exclude '/*' /usr/src/nextcloud/ "${BASE}"
         fi
     done
 
+    echo "Base is ${BASE} - it can not be changed after the first startup"
+    
     if [ "$installed_version" != "0.0.0.0" ]; then
-        run_as 'php /var/www/html/occ upgrade --no-app-disable'
+        run_as 'php '${BASE}'/occ upgrade --no-app-disable'
 
-        run_as 'php /var/www/html/occ app:list' | sed -n "/Enabled:/,/Disabled:/p" > /tmp/list_after
+        # run_as 'php '${BASE}'/occ app:list' > /tmp/list_after
+        run_as 'php '${BASE}'/occ app:list' | sed -n "/Enabled:/,/Disabled:/p" > /tmp/list_after
         echo "The following apps have beed disabled:"
         diff /tmp/list_before /tmp/list_after | grep '<' | cut -d- -f2 | cut -d: -f1
         rm -f /tmp/list_before /tmp/list_after
