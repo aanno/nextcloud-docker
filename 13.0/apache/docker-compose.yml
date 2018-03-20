@@ -1,0 +1,24 @@
+# Use only for testing the BASE_PATH feature
+# An unencrypted nextcloud will be accessible at
+# http://localhost/${BASE_PATH}
+version: '2'
+services:
+  app:
+    image: aanno/nextcloud:13.0.0-apache
+    ports: 
+        - 80:80
+    container_name: nextcloud-docker-apache
+    volumes:
+# Attention: Adapt this to your BASE_PATH
+#      - ./apps:/var/www/html/nextcloud/custom_apps
+#      - ./config:/var/www/html/nextcloud/config
+      - ./data:/var/www/html/nextcloud/data
+    environment:
+        - BASE_PATH=/nextcloud
+    networks:
+        - bridge
+
+networks:
+    bridge:
+        external:
+            name: app
