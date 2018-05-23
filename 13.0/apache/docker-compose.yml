@@ -4,9 +4,9 @@
 version: '2'
 services:
   app:
-    image: aanno/nextcloud:13.0.0-apache
+    image: aanno/nextcloud:13.0.2-apache
     ports: 
-        - 80:80
+        - 8080:80
     container_name: nextcloud-docker-apache
     volumes:
 # Attention: Adapt this to your BASE_PATH
