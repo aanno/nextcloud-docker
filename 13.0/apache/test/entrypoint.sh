@@ -41,7 +41,8 @@ if version_greater "$image_version" "$installed_version"; then
     else
       rsync_options="-rlD"
     fi
-    rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
+    # --delete and --exclude does not work well - hence I vote keeping old cruft (tp)
+    rsync $rsync_options --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
 
     for dir in config data custom_apps themes; do
         if [ ! -d "/var/www/html/$dir" ] || directory_empty "/var/www/html/$dir"; then

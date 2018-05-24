@@ -1,10 +1,13 @@
+# build testing-master with
+# docker build . -t testing-master
+
 # Use only for testing the BASE_PATH feature
 # An unencrypted nextcloud will be accessible at
 # http://localhost/${BASE_PATH}
 version: '3.3'
 services:
   app:
-    image: nextcloud:13.0-apache
+    image: testing-master
     ports: 
         - 8080:80
     container_name: nextcloud-docker-apache
