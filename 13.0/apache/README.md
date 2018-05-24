@@ -19,3 +19,4 @@ You have to comment out the 'RedirectMatch' in `000-default.conf`:
 * maybe you have to install an editor: `apt update; apt install nano`
 * `cd /etc/apache2/sites-enabled`
 * edit the file
+* `exit` the container
