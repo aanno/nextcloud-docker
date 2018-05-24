@@ -8,11 +8,11 @@ services:
     ports: 
         - 8080:80
     container_name: nextcloud-docker-apache
-#    volumes:
+    volumes:
 # Attention: Adapt this to your BASE_PATH
 #      - ./apps:/var/www/html/nextcloud/custom_apps
 #      - ./config:/var/www/html/nextcloud/config
-#      - ./data:/var/www/html/nextcloud/data
+       - ./data:/var/www/html/nextcloud/data
     environment:
         - BASE_PATH=/nextcloud
     networks:
