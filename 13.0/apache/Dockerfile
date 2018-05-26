@@ -135,6 +135,8 @@ COPY *.sh /
 COPY config/* /usr/src/nextcloud/config/
 COPY 000-default.conf /etc/apache2/sites-available/
 
+RUN a2enmod proxy_http
+
 # late distribution update
 RUN apt-get update \
     && apt-get dist-upgrade -y \
