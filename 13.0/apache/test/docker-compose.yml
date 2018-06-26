@@ -9,7 +9,7 @@ services:
   app:
     image: testing-master
     ports: 
-        - 8080:80
+        - 8081:80
     container_name: nextcloud-docker-apache
     volumes:
 # Attention: Adapt this to your BASE_PATH
