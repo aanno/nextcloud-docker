@@ -20,6 +20,22 @@ services:
         - BASE_PATH=/nextcloud
     networks:
         - bridge
+  keycloak_container:
+    image: jboss/keycloak
+    container_name: keycloak-server
+    ports:
+      - 8080:8080
+    environment:
+      - PROXY_ADDRESS_FORWARDING=true
+      # defaults to:
+      # -server -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m
+      # -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true
+      #- JAVA_OPTS=-Xmx512m
+      - DB_VENDOR=h2
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin1234
+    networks:
+        - bridge
 
 networks:
     bridge:
