@@ -148,5 +148,16 @@ RUN apt-get update \
     && apt-get dist-upgrade -y \
     && rm -rf /var/lib/apt/lists/*
 
+# late distribution update
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Do all multiple path stuff as late as possible (tp)
+# TODO tp: pre-process 000-default.conf to allow BASE_PATH use
+#          (i.e. envsubst of gettext-base is your friend)
+RUN a2enmod proxy_http
+COPY 000-default.conf /etc/apache2/sites-available/
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
