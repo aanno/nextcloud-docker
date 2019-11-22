@@ -7,12 +7,6 @@ if [ -n $BASE_PATH ]; then
 fi
 mkdir -p "${BASE}"
 
-export BASE="/var/www/html"
-if [ -n $BASE_PATH ]; then
-    export BASE="${BASE}${BASE_PATH}"
-fi
-mkdir -p "${BASE}"
-
 # version_greater A B returns whether A > B
 version_greater() {
     [ "$(printf '%s\n' "$@" | sort -t '.' -n -k1,1 -k2,2 -k3,3 -k4,4 | head -n 1)" != "$1" ]
