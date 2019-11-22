@@ -138,6 +138,12 @@ RUN set -ex; \
 
 COPY *.sh upgrade.exclude /
 COPY config/* /usr/src/nextcloud/config/
+COPY 000-default.conf /etc/apache2/sites-available/
+
+# late distribution update
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]

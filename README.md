@@ -1,3 +1,21 @@
+# Why this fork?
+
+A fork of https://hub.docker.com/_/nextcloud/ (https://github.com/nextcloud/docker/).
+
+Source at https://github.com/aanno/nextcloud-docker .
+
+Branches:
+* **upstream-master**: Should be in sync with https://github.com/nextcloud/docker/
+* **master**: Should be in sync with https://github.com/nextcloud/docker/ - but 
+  includes this modified README.md
+* **tp/set-base-url**: 
+  + *Enhancement*: If you define `BASE_PATH` on the first run, nextcloud will run 
+    at `http://localhost/$BASE_PATH` instead of `http://localhost` (root). This makes 
+    it possible to run nextcloud together with other services on the same hostname.
+    An usage example could be found at 
+    https://github.com/aanno/linux-config/tree/master/docker-compose/nextcloud
+
+
 # What is Nextcloud?
 
 [![Build Status Travis](https://travis-ci.org/nextcloud/docker.svg?branch=master)](https://travis-ci.org/nextcloud/docker)
