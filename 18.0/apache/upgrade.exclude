@@ -3,3 +3,5 @@
 /custom_apps/
 /themes/
 /version.php
+/contributed/
+000-default.conf
