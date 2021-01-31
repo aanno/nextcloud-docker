@@ -3,12 +3,16 @@ version: '3.7'
 services:
   db:
     image: mariadb
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin --binlog-format=ROW
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
     env_file:
       - db.env
+
+  redis:
+    image: redis:alpine
+    restart: always
 
   app:
     image: nextcloud:fpm-alpine
@@ -17,10 +21,12 @@ services:
       - nextcloud:/var/www/html
     environment:
       - MYSQL_HOST=db
+      - REDIS_HOST=redis
     env_file:
       - db.env
     depends_on:
       - db
+      - redis
 
   web:
     build: ./web
@@ -37,6 +43,16 @@ services:
     networks:
       - proxy-tier
       - default
+
+  cron:
+    image: nextcloud:fpm-alpine
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
 
   # proxy:
   #   build: ./proxy
