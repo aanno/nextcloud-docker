@@ -19,9 +19,12 @@ services:
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html
+      - nc_data:/opt/nextcloud/data
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
+      - OVERWRITEWEBROOT=/nextcloud
+      - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
     env_file:
       - db.env
     depends_on:
@@ -87,6 +90,7 @@ services:
 volumes:
   db:
   nextcloud:
+  nc_data:
   certs:
   vhost.d:
   html:
