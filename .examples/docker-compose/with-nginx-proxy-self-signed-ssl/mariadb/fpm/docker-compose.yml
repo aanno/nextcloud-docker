@@ -24,7 +24,8 @@ services:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
       - OVERWRITEWEBROOT=/nextcloud
-      - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
+      # https://github.com/nextcloud/docker/issues/1396
+      # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
     env_file:
       - db.env
     depends_on:
