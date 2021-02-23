@@ -58,6 +58,8 @@ $CONFIG = array (
 
 ## Misc
 
+* Base URL: https://github.com/nextcloud/docker/issues/167
+
 ### Nextcloud notes
 
 * https://github.com/nextcloud/docker standard docker image
@@ -76,10 +78,27 @@ $CONFIG = array (
 * hardening recommends moving data dir, nextcloud docker image supports with by
   NEXTCLOUD_DATA_DIR variable
 * https://plaza.quickbox.io/t/change-default-data-directory-on-nextcloud/7217
+* NEXTCLOUD_DATA_DIR seems not to work on nextcloud-docker: 
+  https://github.com/nextcloud/docker/issues/1396
 
 ### Podman Compose notes
 
 * docker spec: https://docs.docker.com/compose/compose-file/compose-file-v3/
+* podman-compose implementations:
+  + new redhat implementation (in podman 3.x)
+    - https://www.redhat.com/sysadmin/compose-podman-pods
+    - https://www.redhat.com/sysadmin/podman-docker-compose
+  + standard https://github.com/containers/podman-compose
+  + alternative 0 https://github.com/sheeshkebab/podman-compose
+  + alternative 1 https://github.com/abalage/pods-compose
+  + alternative 2 https://github.com/trusch/stackctl
+  + translator: Kompose https://kubernetes.io/docs/tasks/configure-pod-container/translate-compose-kubernetes/
+* podman rest API 2.0
+  + https://www.redhat.com/sysadmin/podmans-new-rest-api
+  + http://crunchtools.com/a-first-look-at-the-podman-2-0-api/
+  + https://podman.io/blogs/2020/06/29/podman-v2-announce.html
+* enabling podman 
+  + https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/building_running_and_managing_containers/using-the-container-tools-api_using-the-container-tools-cli
 
 ### Alternative Web Server
 
