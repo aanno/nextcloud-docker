@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 podman pull nextcloud:fpm-alpine
 podman pull nginx:alpine

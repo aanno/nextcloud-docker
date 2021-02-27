@@ -15,7 +15,8 @@ services:
     restart: always
 
   app:
-    image: nextcloud:fpm-alpine
+    # image: nextcloud:fpm-alpine
+    build: ./nc
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html

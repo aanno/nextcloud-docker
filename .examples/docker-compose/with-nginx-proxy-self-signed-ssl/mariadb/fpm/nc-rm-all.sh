@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 podman pod stop nc
 podman pod rm nc
