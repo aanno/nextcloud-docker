@@ -1,13 +1,16 @@
 #!/bin/sh -x
 set -eu
 
-#/entrypoint.sh "$@"
+ARGS="$@"
+if [ -z "$@" ]; then
+    ARGS="php-fpm"
+fi
 
-# NC_ROOT=/var/www/html
+NC_ROOT=/var/www/html
 # testing
-NC_ROOT=`readlink -f ./tmp`
+# NC_ROOT=`readlink -f ./tmp`
 
-APPDATA=`ls -d $NC_ROOT/data/appdata_*`
+APPDATA=`ls -d $NC_ROOT/data/appdata_* || true`
 if [ -n "$APPDATA" ]; then
 
     if [ "$(id -u)" = 0 ]; then
@@ -28,3 +31,5 @@ if [ -n "$APPDATA" ]; then
     done
 
 fi
+
+/entrypoint.sh "$ARGS"
