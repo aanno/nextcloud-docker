@@ -20,13 +20,14 @@ services:
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html
-      - nc_data:/opt/nextcloud/data
+      - nc_data:/data
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
       - OVERWRITEWEBROOT=/nextcloud
       # https://github.com/nextcloud/docker/issues/1396
       # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
+      - NEXTCLOUD_DATA_DIR=/data
     env_file:
       - db.env
     depends_on:
@@ -56,6 +57,14 @@ services:
     restart: always
     volumes:
       - nextcloud:/var/www/html
+      - nc_data:/data
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - OVERWRITEWEBROOT=/nextcloud
+      # https://github.com/nextcloud/docker/issues/1396
+      # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
+      - NEXTCLOUD_DATA_DIR=/data
     entrypoint: /cron.sh
     depends_on:
       - db

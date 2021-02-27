@@ -10,7 +10,18 @@ NC_ROOT=/var/www/html
 # testing
 # NC_ROOT=`readlink -f ./tmp`
 
-APPDATA=`ls -d $NC_ROOT/data/appdata_* || true`
+if [ -n "$NEXTCLOUD_DATA_DIR" ]; then
+    DATA="$NEXTCLOUD_DATA_DIR"
+else
+    DATA="$NC_ROOT/data"
+fi
+# fix perms
+if [ "$(id -u)" = 0 ]; then
+    mkdir "$DATA" || true
+    chown -R www-data:root "$DATA"
+fi
+
+APPDATA=`ls -d $DATA/appdata_* || true`
 if [ -n "$APPDATA" ]; then
 
     if [ "$(id -u)" = 0 ]; then
