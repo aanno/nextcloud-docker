@@ -1,4 +1,4 @@
-FROM nextcloud:18.0.14-fpm
+FROM nextcloud:19.0.9-fpm
 
 COPY myentrypoint.sh /myentrypoint.sh
 ENTRYPOINT ["/myentrypoint.sh"]
