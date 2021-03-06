@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db:
     image: mariadb
-    command: --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin --binlog-format=ROW --log_bin_compress
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
@@ -12,7 +12,7 @@ services:
 
   redis:
     image: redis:alpine
-    restart: always
+    restart: unless-stopped
 
   app:
     # image: nextcloud:fpm-alpine
@@ -54,7 +54,7 @@ services:
 
   cron:
     image: nextcloud:fpm-alpine
-    restart: always
+    restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html
       - nc_data:/data
