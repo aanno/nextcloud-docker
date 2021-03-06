@@ -1,4 +1,4 @@
-FROM nextcloud:20.0.8-fpm-alpine
+FROM nextcloud:21.0.0-fpm-alpine
 
 COPY myentrypoint.sh /myentrypoint.sh
 ENTRYPOINT ["/myentrypoint.sh"]
