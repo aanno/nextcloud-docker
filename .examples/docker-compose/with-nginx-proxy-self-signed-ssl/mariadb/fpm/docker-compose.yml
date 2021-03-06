@@ -43,7 +43,7 @@ services:
       - 8080:8080
       - 8443:8443
     volumes:
-      - nextcloud:/var/www/html:z,ro
+      - nextcloud:/var/www/html:z
       - ./apps:/var/www/html/custom_apps:z
       - certs:/certs:z,ro
       - ./web/snippets:/etc/nginx/snippets:z,ro
@@ -56,7 +56,7 @@ services:
       - default
 
   cron:
-    image: nextcloud:fpm-alpine
+    image: nextcloud:17.0.1-fpm
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z
