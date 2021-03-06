@@ -44,6 +44,7 @@ services:
       - 8443:8443
     volumes:
       - nextcloud:/var/www/html:z,ro
+      - nc_apps:/var/www/html/custom_apps:z
       - certs:/certs:z,ro
       - ./web/snippets:/etc/nginx/snippets:z,ro
     environment:

@@ -1,7 +1,10 @@
 #!/bin/sh -x
 
-podman pod rm -f dhparam
-podman rmi localhost/dhparam_openssl
-podman-compose -p dhparam -f create-dhparam-compose.yml up
-podman pod rm -f dhparam
-podman rmi localhost/dhparam_openssl
+# ATTENTION: pom MUST be named 'nc' - otherwise the volume has the wrong name!
+PNAME="nc"
+
+podman pod rm -f "$PNAME"
+podman rmi localhost/dhparam_certs localhost/nc_certs
+podman-compose -p "$PNAME" -f create-dhparam-compose.yml up
+podman pod rm -f "$PNAME" 
+podman rmi localhost/dhparam_openssl localhost/nc_certs

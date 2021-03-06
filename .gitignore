@@ -3,4 +3,6 @@ tmp/
 *.iml
 *.log
 *.out
+dumps/
+*.orig
 
