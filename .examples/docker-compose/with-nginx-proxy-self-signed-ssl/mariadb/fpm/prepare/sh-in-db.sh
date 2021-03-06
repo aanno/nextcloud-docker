@@ -37,5 +37,5 @@ podman \
   --rm --env-file=../db.env \
   --entrypoint=bash \
   -it \
-  --volume ./dumps:/dumps \
+  --volume ./dumps:/dumps:z \
   mariadb
