@@ -56,7 +56,7 @@ services:
       - default
 
   cron:
-    image: nextcloud:19.0.9-fpm
+    image: nextcloud:20.0.8-fpm-alpine
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z
