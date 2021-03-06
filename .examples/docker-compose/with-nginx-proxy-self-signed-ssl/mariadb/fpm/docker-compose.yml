@@ -21,8 +21,8 @@ services:
     volumes:
       - nextcloud:/var/www/html
       - nc_data:/data
-      - nc_config:/var/www/html/config:z
-      - nc_apps:/var/www/html/custom_apps:z
+      - ./config:/var/www/html/config:z
+      - ./apps:/var/www/html/custom_apps:z
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
@@ -44,7 +44,7 @@ services:
       - 8443:8443
     volumes:
       - nextcloud:/var/www/html:z,ro
-      - nc_apps:/var/www/html/custom_apps:z
+      - ./apps:/var/www/html/custom_apps:z
       - certs:/certs:z,ro
       - ./web/snippets:/etc/nginx/snippets:z,ro
     environment:
@@ -61,8 +61,8 @@ services:
     volumes:
       - nextcloud:/var/www/html:z
       - nc_data:/data:z
-      - nc_config:/var/www/html/config:z
-      - nc_apps:/var/www/html/custom_apps:z
+      - ./config:/var/www/html/config:z
+      - ./apps:/var/www/html/custom_apps:z
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis

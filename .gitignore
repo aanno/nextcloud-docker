@@ -5,4 +5,6 @@ tmp/
 *.out
 dumps/
 *.orig
-
+.vscode/
+/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/apps/
+/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/config/
