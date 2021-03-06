@@ -32,8 +32,9 @@
 
 podman \
   run \
+  --pod nc --name nc_dbsh \
   --rm --env-file=../db.env \
   --entrypoint=bash \
   -it \
-  --volume db:/var/lib/mysql --volume ./dumps:/dumps:ro \
+  --volume db:/var/lib/mysql --volume ./dumps:/dumps \
   mariadb
