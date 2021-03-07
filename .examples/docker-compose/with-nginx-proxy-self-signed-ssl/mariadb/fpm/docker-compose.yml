@@ -20,8 +20,9 @@ services:
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html
-      - nc_data:/data:z
+      # - nc_data:/data:z
       # - /home/dockeruser/nextcloud/data:/data:z
+      - ./data:/data:z
       - ./config:/var/www/html/config:z
       - ./apps:/var/www/html/custom_apps:z
     environment:
@@ -61,8 +62,9 @@ services:
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z
-      - nc_data:/data:z
+      # - nc_data:/data:z
       # - /home/dockeruser/nextcloud/data:/data:z
+      - ./data:/data:z
       - ./config:/var/www/html/config:z
       - ./apps:/var/www/html/custom_apps:z
     environment:
