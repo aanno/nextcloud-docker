@@ -47,7 +47,8 @@ services:
     volumes:
       - nextcloud:/var/www/html:z
       - ./apps:/var/www/html/custom_apps:z
-      - certs:/certs:z,ro
+      # - certs:/certs:z,ro
+      - ./certs:/certs:z,ro
       - ./web/snippets:/etc/nginx/snippets:z,ro
     environment:
       - VIRTUAL_HOST=
