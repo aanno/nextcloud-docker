@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
+      - ./backup:/backup:z
     env_file:
       - db.env
 
@@ -25,6 +26,7 @@ services:
       - ./data:/data:z
       - ./config:/var/www/html/config:z
       - ./apps:/var/www/html/custom_apps:z
+      - ./backup:/backup:z
     environment:
       - MYSQL_HOST=db
       - REDIS_HOST=redis
