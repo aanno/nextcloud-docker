@@ -34,7 +34,7 @@ if [ -n "$APPDATA" ]; then
     for dir1 in $APPDATA; do
         for dir2 in css js; do
             if [ -d "$dir1/$dir2" ]; then
-                rsync $rsync_options --delete \
+                rsync $rsync_options \
                 "$dir1/$dir2" "$NC_ROOT"
                 echo "Updated $dir2 folder"
             fi
