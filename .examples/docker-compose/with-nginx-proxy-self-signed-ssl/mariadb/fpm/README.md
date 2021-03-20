@@ -8,6 +8,13 @@
   + richdocuments
   + richdocumentscode
 
+## TODOs
+
+* [server to client push](https://github.com/nextcloud/notify_push)
+* [certbot](https://certbot.eff.org/docs/using.html) (not integraded, incomplete)
+  + https://certbot.eff.org/docs/install.html#running-with-docker
+  + https://certbot.eff.org/docs/ciphers.html#weakdh-logjam
+
 ## DB backup and restore
 
 * [backup](https://docs.nextcloud.com/server/latest/admin_manual/maintenance/backup.html)
