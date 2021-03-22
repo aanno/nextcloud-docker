@@ -7,6 +7,7 @@
   + spreed (aka talk)
   + richdocuments
   + richdocumentscode
+* [svg images](https://github.com/nextcloud/docker/issues/14)
 
 ## TODOs
 
