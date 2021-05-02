@@ -1,0 +1,127 @@
+version: '3.7'
+
+services:
+  db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin --binlog-format=ROW --log_bin_compress
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+      - ./backup:/backup:z
+    env_file:
+      - db.env
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+
+  app:
+    # image: nextcloud:fpm-alpine
+    build: ./nc
+    restart: unless-stopped
+    volumes:
+      - nextcloud:/var/www/html
+      # - nc_data:/data:z
+      # - /home/dockeruser/nextcloud/data:/data:z
+      - ./data:/data:z
+      - ./config:/var/www/html/config:z
+      - ./apps:/var/www/html/custom_apps:z
+      - ./backup:/backup:z
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - OVERWRITEWEBROOT=/nextcloud
+      # https://github.com/nextcloud/docker/issues/1396
+      # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
+      - NEXTCLOUD_DATA_DIR=/data
+    env_file:
+      - db.env
+    depends_on:
+      - db
+      - redis
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nextcloud:/var/www/html:z
+      - ./apps:/var/www/html/custom_apps:z
+      # - certs:/certs:z,ro
+      # - ./certs:/certs:z,ro
+      - /home/tpasch/certbot/cbconfig:/certs:z,ro
+      - ./web/snippets:/etc/nginx/snippets:z,ro
+    environment:
+      - VIRTUAL_HOST=
+    depends_on:
+      - app
+    networks:
+      - proxy-tier
+      - default
+
+  cron:
+    image: nextcloud:21.0.1-fpm-alpine
+    restart: unless-stopped
+    volumes:
+      - nextcloud:/var/www/html:z
+      # - nc_data:/data:z
+      # - /home/dockeruser/nextcloud/data:/data:z
+      - ./data:/data:z
+      - ./config:/var/www/html/config:z
+      - ./apps:/var/www/html/custom_apps:z
+    environment:
+      - MYSQL_HOST=db
+      - REDIS_HOST=redis
+      - OVERWRITEWEBROOT=/nextcloud
+      # https://github.com/nextcloud/docker/issues/1396
+      # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
+      - NEXTCLOUD_DATA_DIR=/data
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
+  # proxy:
+  #   build: ./proxy
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - certs:/etc/nginx/certs:ro
+  #     - vhost.d:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #   networks:
+  #     - proxy-tier
+  #   depends_on:
+  #     - omgwtfssl
+
+  # omgwtfssl:
+  #   image: paulczar/omgwtfssl
+  #   restart: "no"
+  #   volumes:
+  #     - certs:/certs
+  #   environment:
+  #     - SSL_SUBJECT=servhostname.local
+  #     - CA_SUBJECT=my@example.com
+  #     - SSL_KEY=/certs/servhostname.local.key
+  #     - SSL_CSR=/certs/servhostname.local.csr
+  #     - SSL_CERT=/certs/servhostname.local.crt
+  #   networks:
+  #     - proxy-tier
+
+volumes:
+  db:
+  nextcloud:
+  nc_data:
+  nc_config:
+  nc_app:
+  certs:
+  vhost.d:
+  html:
+
+networks:
+  proxy-tier:
