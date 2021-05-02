@@ -5,7 +5,8 @@ services:
     build: ./dhparam
     restart: "no"
     volumes: 
-      - certs:/certs:z
+      # - certs:/certs:z
+      - /home/tpasch/certbot/cbconfig/live:/certs:z
 
 volumes:
   certs:
