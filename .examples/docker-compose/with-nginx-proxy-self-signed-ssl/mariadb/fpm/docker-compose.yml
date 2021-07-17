@@ -10,10 +10,14 @@ services:
       - ./backup:/backup:z
     env_file:
       - db.env
+    networks:
+      - proxy-tier
 
   redis:
     image: redis:alpine
     restart: unless-stopped
+    networks:
+      - proxy-tier
 
   app:
     # image: nextcloud:fpm-alpine
@@ -39,6 +43,23 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - proxy-tier
+
+  notify_push:
+    image: docker.io/aanno/notify_push:v0.2.1
+    restart: unless-stopped
+    volumes:
+      # - nextcloud:/var/www/html:ro
+      - ./config:/var/www/html/config:z,ro
+    env:
+      - PORT=7867
+    entrypoint: [ "/notify_push", "/var/www/html/config/config.php" ]
+    depends_on:
+      - app
+      - web
+    networks:
+      - proxy-tier
 
   web:
     build: ./web
@@ -59,7 +80,7 @@ services:
       - app
     networks:
       - proxy-tier
-      - default
+      # - default
 
   cron:
     image: nextcloud:21.0.3-fpm-alpine
@@ -82,6 +103,9 @@ services:
     depends_on:
       - db
       - redis
+    networks:
+      - proxy-tier
+
 
   # proxy:
   #   build: ./proxy
@@ -125,3 +149,4 @@ volumes:
 
 networks:
   proxy-tier:
+
