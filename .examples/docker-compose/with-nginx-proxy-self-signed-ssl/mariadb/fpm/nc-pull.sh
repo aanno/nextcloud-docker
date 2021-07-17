@@ -6,3 +6,4 @@ podman pull nginx:alpine
 podman pull paulczar/omgwtfssl
 podman pull redis:alpine
 podman pull mariadb
+podman pull docker.io/aanno/notify_push:v0.2.1
