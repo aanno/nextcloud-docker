@@ -49,17 +49,17 @@ services:
   notify_push:
     image: docker.io/aanno/notify_push:v0.2.1
     restart: unless-stopped
-    # volumes:
-    #   - nextcloud:/var/www/html:ro
-    #   - ./config:/var/www/html/config:z,ro
-    #   - ./apps:/var/www/html/custom_apps:z,ro
+    volumes:
+      # - nextcloud:/var/www/html:ro
+      - ./config/config.php:/var/www/html/config/config.php:z,ro
+      # - ./apps:/var/www/html/custom_apps:z,ro
     env:
       - PORT=7867
-      - DATABASE_URL=postgres://user:password@db_host/db_name
-      - DATABASE_PREFIX=oc_
-      - REDIS_URL=redis://redis
-      - NEXTCLOUD_URL=https://netzgeneration.com/nextcloud
-    # entrypoint: [ "/notify_push", "/var/www/html/config/config.php" ]
+      # - DATABASE_URL=postgres://user:password@db_host/db_name
+      # - DATABASE_PREFIX=oc_
+      # - REDIS_URL=redis://redis
+      # - NEXTCLOUD_URL=https://netzgeneration.com/nextcloud
+    entrypoint: [ "/notify_push", "/var/www/html/config/config.php" ]
     depends_on:
       - app
       - web
