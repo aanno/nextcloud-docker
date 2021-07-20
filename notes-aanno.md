@@ -112,3 +112,11 @@ $CONFIG = array (
   + https://www.litespeedtech.com/support/wiki/doku.php/litespeed_wiki:php:process-mode#daemon_mode
   + https://docs.litespeedtech.com/cloud/docker/openlitespeed/
   + https://hub.docker.com/r/litespeedtech/openlitespeed
+  
+## Known (unresolved) problems
+
+* [no svg support in docker image](https://github.com/nextcloud/docker/issues/1414#issuecomment-798781132)
+  + https://github.com/nextcloud/docker/tree/master/.examples#imagemagick-svg-support
+* [unicode 4-byte-support not working in mariadb 10.6](https://dba.stackexchange.com/questions/256427/unable-to-create-tables-with-row-format-compressed)
+  + https://docs.nextcloud.com/server/21/admin_manual/configuration_database/mysql_4byte_support.html
+
