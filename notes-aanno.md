@@ -119,4 +119,10 @@ $CONFIG = array (
   + https://github.com/nextcloud/docker/tree/master/.examples#imagemagick-svg-support
 * [unicode 4-byte-support not working in mariadb 10.6](https://dba.stackexchange.com/questions/256427/unable-to-create-tables-with-row-format-compressed)
   + https://docs.nextcloud.com/server/21/admin_manual/configuration_database/mysql_4byte_support.html
+* nextcloud incompatible with mariadb 10.6
+  + https://github.com/nextcloud/server/issues/25436
+  + https://github.com/nextcloud/docker/issues/1536
+  + https://github.com/nextcloud/docker/issues/1540
+
+  
 
