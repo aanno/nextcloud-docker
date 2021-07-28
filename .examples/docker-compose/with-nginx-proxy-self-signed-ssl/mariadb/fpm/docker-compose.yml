@@ -152,6 +152,10 @@ volumes:
   vhost.d:
   html:
 
+# https://stackoverflow.com/questions/38088279/communication-between-multiple-docker-compose-projects
+# https://docs.docker.com/compose/networking/
 networks:
-  proxy-tier:
+    proxy-tier:
+        external: true
+        name: proxy-tier
 

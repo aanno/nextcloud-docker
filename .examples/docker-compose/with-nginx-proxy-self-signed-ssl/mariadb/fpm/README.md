@@ -1,5 +1,7 @@
 # Nextcloud example
 
+Before everything else, `mv db.env.template db.env` and adapt it to your needs!
+
 ## Known issues
 
 * [extreme slowdown](https://github.com/nextcloud/richdocuments/issues/1282) <br/>
