@@ -8,14 +8,14 @@ pushd "$GIT_ROOT/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/maria
 
 source "scripts/env.sh"
 
-#rm docker-compose.yml server.conf || true
-#envsubst <docker-compose.in.yml >docker-compose.yml
+rm web/nginx.conf || true
+envsubst <web/nginx.in.conf >web/nginx.conf
 
 pushd prepare
   ./create-dhparam.sh
 popd
 
 podman rmi localhost/nc_web localhost/fpm_web localhost/nc_proxy localhost/fpm_proxy 
-podman-compose -p nc up -d 
+# podman-compose -p nc up -d 
 
 popd
