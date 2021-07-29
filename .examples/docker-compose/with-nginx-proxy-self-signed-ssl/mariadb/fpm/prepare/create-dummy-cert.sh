@@ -12,6 +12,8 @@ export SERVER_DOMAINS_COMMA=`echo ${SERVER_FQ_DOMAINS} | sed -E 's/[[:space:]]+/
 # ATTENTION: pom MUST be named 'nc' - otherwise the volume has the wrong name!
 PNAME="nc"
 
+mkdir -p "${SERVER_HTTPS_CERT_VOLUME}/live/${CERTBOT_PRIMARY_DOMAIN}" || true
+
 pushd prepare
   podman pod rm -f "$PNAME" || true
   podman-compose -p "$PNAME" -f create-dummy-cert-compose.yml up
