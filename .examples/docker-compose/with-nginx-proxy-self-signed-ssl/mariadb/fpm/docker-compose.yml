@@ -4,7 +4,9 @@ services:
   db:
     image: mariadb
     # --skip-innodb-read-only-compressed: https://github.com/nextcloud/server/issues/25436
-    command: --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin --binlog-format=ROW --log_bin_compress --skip-innodb-read-only-compressed
+    command: >
+      --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin
+      --binlog-format=ROW --log_bin_compress --skip-innodb-read-only-compressed
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
@@ -32,13 +34,16 @@ services:
       - ./config:/var/www/html/config:z
       - ./apps:/var/www/html/custom_apps:z
       - ./backup:/backup:z
+    # TODO tp: This changes with --podman-run-args='--net proxy-tier'
     environment:
-      - MYSQL_HOST=db
-      - REDIS_HOST=redis
-      - OVERWRITEWEBROOT=/nextcloud
+      # MYSQL_HOST: db
+      # REDIS_HOST: redis
+      MYSQL_HOST: nc_db_1
+      REDIS_HOST: nc_redis_1
+      OVERWRITEWEBROOT: /nextcloud
       # https://github.com/nextcloud/docker/issues/1396
       # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
-      - NEXTCLOUD_DATA_DIR=/data
+      NEXTCLOUD_DATA_DIR: /data
     env_file:
       - db.env
     depends_on:
@@ -99,36 +104,22 @@ services:
       - ./data:/data:z
       - ./config:/var/www/html/config:z
       - ./apps:/var/www/html/custom_apps:z
+    # TODO tp: This changes with --podman-run-args='--net proxy-tier'
     environment:
-      - MYSQL_HOST=db
-      - REDIS_HOST=redis
-      - OVERWRITEWEBROOT=/nextcloud
+      # MYSQL_HOST: db
+      # REDIS_HOST: redis
+      MYSQL_HOST: nc_db_1
+      REDIS_HOST: nc_redis_1
+      OVERWRITEWEBROOT: /nextcloud
       # https://github.com/nextcloud/docker/issues/1396
       # - NEXTCLOUD_DATA_DIR=/opt/nextcloud/data
-      - NEXTCLOUD_DATA_DIR=/data
+      NEXTCLOUD_DATA_DIR: /data
     entrypoint: /cron.sh
     depends_on:
       - db
       - redis
     networks:
       - proxy-tier
-
-
-  # proxy:
-  #   build: ./proxy
-  #   restart: always
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - certs:/etc/nginx/certs:ro
-  #     - vhost.d:/etc/nginx/vhost.d
-  #     - html:/usr/share/nginx/html
-  #     - /var/run/docker.sock:/tmp/docker.sock:ro
-  #   networks:
-  #     - proxy-tier
-  #   depends_on:
-  #     - omgwtfssl
 
 volumes:
   db:
