@@ -15,3 +15,4 @@ dumps/
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/db.env
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/scripts/env.sh
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/web/nginx.conf
+/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/web/snippets/le-certbot.conf

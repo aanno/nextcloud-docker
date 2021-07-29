@@ -78,7 +78,7 @@ services:
       - ./apps:/var/www/html/custom_apps:z
       # - certs:/certs:z,ro
       # - ./certs:/certs:z,ro
-      - /home/tpasch/certbot/cbconfig:/certs:z,ro
+      - ${SERVER_HTTPS_CERT_VOLUME}:/certs:z,ro
       - ./web/snippets:/etc/nginx/snippets:z,ro
     environment:
       - VIRTUAL_HOST=
