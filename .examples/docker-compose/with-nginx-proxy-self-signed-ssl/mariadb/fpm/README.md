@@ -1,6 +1,7 @@
 # Nextcloud example
 
 Before everything else, `mv db.env.template db.env` and adapt it to your needs!
+Also `mv scripts/env.sh.template scripts/env.sh` and adapt it to your needs!
 
 ## Known issues
 
@@ -13,10 +14,20 @@ Before everything else, `mv db.env.template db.env` and adapt it to your needs!
 
 ## TODOs
 
-* [server to client push](https://github.com/nextcloud/notify_push)
+* [server to client push](https://github.com/nextcloud/notify_push) DONE!
 * [certbot](https://certbot.eff.org/docs/using.html) (not integraded, incomplete)
   + https://certbot.eff.org/docs/install.html#running-with-docker
   + https://certbot.eff.org/docs/ciphers.html#weakdh-logjam
+* nginx not starting
+  + https://sandro-keil.de/blog/let-nginx-start-if-upstream-host-is-unavailable-or-down/
+  + https://stackoverflow.com/questions/32845674/setup-nginx-not-to-crash-if-host-in-upstream-is-not-found
+* podman DNS
+  + https://github.com/containers/podman/issues/3277
+* up-to-date podman-compose
+  + https://github.com/containers/podman-compose
+  + https://github.com/containers/podman-compose/issues/283 (--podman-run-args)
+* kube/pod file instead of podman-compose/docker-compose
+  + https://www.redhat.com/sysadmin/compose-podman-pods
 
 ## DB backup and restore
 

@@ -13,4 +13,4 @@ dumps/
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/backup/
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/web.test/
 /.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/db.env
-
+/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm/scripts/env.sh
