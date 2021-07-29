@@ -13,10 +13,8 @@ source "scripts/env.sh"
 
 pushd prepare
   podman pod rm -f "$PNAME" || true
-  # podman rmi localhost/dhparam_certs localhost/nc_certs nc_openssl_1 || true
-  podman-compose -p "$PNAME" -f create-dhparam-compose.yml up
+  podman-compose -p "$PNAME" -f create-dummy-cert-compose.yml up
   podman pod rm -f "$PNAME" 
-  # podman rmi localhost/dhparam_openssl localhost/nc_certs nc_openssl_1 || true
 popd
 
-popd 
+popd
