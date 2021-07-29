@@ -71,8 +71,8 @@ services:
     build: ./web
     restart: unless-stopped
     ports:
-      - 80:80
-      - 443:443
+      - ${SERVER_HTTP_PORT}:${SERVER_HTTP_PORT}
+      - ${SERVER_HTTPS_PORT}:${SERVER_HTTPS_PORT}
     volumes:
       - nextcloud:/var/www/html:z
       - ./apps:/var/www/html/custom_apps:z
