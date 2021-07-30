@@ -22,6 +22,6 @@ pushd prepare
 popd
 
 podman rmi localhost/nc_web localhost/fpm_web localhost/nc_proxy localhost/fpm_proxy || true
-podman-compose -p nc -t identity --podman-run-args='--net proxy-tier' up # -d 
+podman-compose -p nc -t identity --podman-run-args='--net proxy-tier' up -d
 
 popd

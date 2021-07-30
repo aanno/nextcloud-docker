@@ -3,6 +3,41 @@
 Before everything else, `mv db.env.template db.env` and adapt it to your needs!
 Also `mv scripts/env.sh.template scripts/env.sh` and adapt it to your needs!
 
+## Test setup
+
+### notify_push with test setup (not working)
+
+* You are (probably) using a dummy cert
+* Map the fqn(s) of your server to your ip in `/etc/hosts`:
+  ```
+  # testing nextcloud 
+  192.168.10.20 breitbandig breitbandig.local
+  192.168.10.20 www.breitbandig.local
+  192.168.10.20 signaling.breitbandig.local
+  192.168.10.20 netzgeneration netzgeneration.local
+  192.168.10.20 www.netzgeneration.local
+  192.168.10.20 signaling.netzgeneration.local
+  ```
+* Edit `config/config.php` to include the name(s) in the array of `trusted_domains`:
+  ```php
+    'trusted_domains' => 
+  array (
+    0 => 'localhost:8443',
+    1 => 'breitbandig:8443',
+    2 => 'breitbandig.local:8443',
+    3 => 'www.breitbandig.local:8443',
+    4 => 'signaling.breitbandig.local:8443',
+    5 => 'netzgeneration:8443',
+    6 => 'netzgeneration.local:8443',
+    7 => 'www.netzgeneration.local:8443',
+    8 => 'signaling.netzgeneration.local:8443',
+  ),
+  ```
+* Install the app 'Client Push' and enable it
+* `./scripts/occ.sh notify_push:setup https://breitbandig.local:8443/nextcloud/push` should run but errors
+* Use `wget --no-check-certificate https://localhost:8443/nextcloud/index.php/apps/notify_push/test/version` for testing
+* You could try https://breitbandig.local:8443/nextcloud/push/test/cookie as well
+
 ## Known issues
 
 * [extreme slowdown](https://github.com/nextcloud/richdocuments/issues/1282) <br/>
