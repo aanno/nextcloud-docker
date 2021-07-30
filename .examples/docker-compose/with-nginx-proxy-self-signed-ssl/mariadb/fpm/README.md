@@ -33,8 +33,11 @@ Also `mv scripts/env.sh.template scripts/env.sh` and adapt it to your needs!
     8 => 'signaling.netzgeneration.local:8443',
   ),
   ```
+* Create the network `proxy-tier`. _The gateway of this network is also the DNS resolve address to use!_
 * Install the app 'Client Push' and enable it
-* `./scripts/occ.sh notify_push:setup https://breitbandig.local:8443/nextcloud/push` should run but errors
+* `./scripts/occ.sh notify_push:setup https://breitbandig.local:8443/nextcloud/push` should run but errors with
+  + 🗴 can't connect to push server: Client error: `GET https://breitbandig.local:8443/nextcloud/push/test/cookie`
+    resulted in a `404 Not Found` response
 * Use `wget --no-check-certificate https://localhost:8443/nextcloud/index.php/apps/notify_push/test/version` for testing
 * You could try https://breitbandig.local:8443/nextcloud/push/test/cookie as well
 
