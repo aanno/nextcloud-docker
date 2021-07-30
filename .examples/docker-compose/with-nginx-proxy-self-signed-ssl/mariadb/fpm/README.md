@@ -7,6 +7,8 @@ Also `mv scripts/env.sh.template scripts/env.sh` and adapt it to your needs!
 
 ### notify_push with test setup (not working)
 
+Not working: Maybe a 'h2' issue?!: https://github.com/nextcloud/notify_push/issues/89
+
 * You are (probably) using a dummy cert
 * Map the fqn(s) of your server to your ip in `/etc/hosts`:
   ```
