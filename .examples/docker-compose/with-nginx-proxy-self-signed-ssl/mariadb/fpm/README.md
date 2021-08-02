@@ -5,9 +5,10 @@ Also `mv scripts/env.sh.template scripts/env.sh` and adapt it to your needs!
 
 ## Test setup
 
-### notify_push with test setup (not working)
+### notify_push with test setup
 
-Not working: Maybe a 'h2' issue?!: https://github.com/nextcloud/notify_push/issues/89
+Not working: Maybe a 'h2' issue?!: https://github.com/nextcloud/notify_push/issues/89 <br/>
+No, nginx problem (i.e. trailing '/' at end of `proxy_pass`)!
 
 * You are (probably) using a dummy cert
 * Map the fqn(s) of your server to your ip in `/etc/hosts`:
@@ -22,6 +23,8 @@ Not working: Maybe a 'h2' issue?!: https://github.com/nextcloud/notify_push/issu
   ```
 * Edit `config/config.php` to include the name(s) in the array of `trusted_domains`:
   ```php
+    // TODO tp: This is ways to much but 'nc_web_1' does not work...
+    'trusted_proxies' => ['10.88.2.0/24'],
     'trusted_domains' => 
   array (
     0 => 'localhost:8443',
@@ -58,12 +61,13 @@ Not working: Maybe a 'h2' issue?!: https://github.com/nextcloud/notify_push/issu
 * [certbot](https://certbot.eff.org/docs/using.html) (not integraded, incomplete)
   + https://certbot.eff.org/docs/install.html#running-with-docker
   + https://certbot.eff.org/docs/ciphers.html#weakdh-logjam
-* nginx not starting
+* [use standardized 'Forward' header](https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/)
+* nginx not starting DONE!
   + https://sandro-keil.de/blog/let-nginx-start-if-upstream-host-is-unavailable-or-down/
   + https://stackoverflow.com/questions/32845674/setup-nginx-not-to-crash-if-host-in-upstream-is-not-found
-* podman DNS
+* podman DNS DONE!
   + https://github.com/containers/podman/issues/3277
-* up-to-date podman-compose
+* up-to-date podman-compose DONE!
   + https://github.com/containers/podman-compose
   + https://github.com/containers/podman-compose/issues/283 (--podman-run-args)
 * kube/pod file instead of podman-compose/docker-compose

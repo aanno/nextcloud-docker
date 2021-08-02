@@ -68,6 +68,8 @@ services:
       # DATABASE_PREFIX: oc_
       # REDIS_URL: redis://redis
       # NEXTCLOUD_URL: https://netzgeneration.com/nextcloud
+      # explizit intern URL (to circumvent trusted proxy problems)
+      # NEXTCLOUD_URL: "https://nc_web_1:${SERVER_HTTPS_PORT}/nextcloud"
     entrypoint: [ "/notify_push", "/var/www/html/config/config.php" ]
     depends_on:
       - app
