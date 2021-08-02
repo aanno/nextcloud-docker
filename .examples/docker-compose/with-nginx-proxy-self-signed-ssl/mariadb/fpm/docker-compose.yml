@@ -4,9 +4,11 @@ services:
   db:
     image: mariadb
     # --skip-innodb-read-only-compressed: https://github.com/nextcloud/server/issues/25436
-    command: >
-      --transaction-isolation=READ-COMMITTED --log-bin=mysqld-bin
-      --binlog-format=ROW --log_bin_compress --skip-innodb-read-only-compressed
+    command: [
+      "--transaction-isolation=READ-COMMITTED", "--log-bin=mysqld-bin",
+      "--binlog-format=ROW", "--log_bin_compress",
+      "--skip-innodb-read-only-compressed"
+    ]
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
@@ -76,6 +78,10 @@ services:
   web:
     build: ./web
     restart: unless-stopped
+    # debug, see:
+    # https://docs.nginx.com/nginx/admin-guide/monitoring/debugging/
+    # https://hub.docker.com/_/nginx
+    command: [nginx-debug, '-g', 'daemon off;']
     ports:
       - ${SERVER_HTTP_PORT}:${SERVER_HTTP_PORT}
       - ${SERVER_HTTPS_PORT}:${SERVER_HTTPS_PORT}
