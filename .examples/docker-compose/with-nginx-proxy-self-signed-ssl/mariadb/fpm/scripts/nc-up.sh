@@ -11,7 +11,7 @@ source "scripts/env.sh"
 rm web/nginx.conf web/snippets/le-certbot.conf || true
 # HACK for NOT replacing nginx variables
 envsubst <web/nginx.in.conf >web/nginx.conf \
-  '${SERVER_FQ_DOMAINS} ${SERVER_HTTP_PORT} ${SERVER_HTTPS_PORT} ${DNS_RESOLVER_IP}'
+  '${SERVER_EXTERNAL_IP} ${SERVER_FQ_DOMAINS} ${SERVER_HTTP_PORT} ${SERVER_HTTPS_PORT} ${DNS_RESOLVER_IP}'
 
 envsubst <web/snippets/le-certbot.in.conf >web/snippets/le-certbot.conf
 
