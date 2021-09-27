@@ -55,7 +55,7 @@ services:
       - proxy-tier
 
   notify_push:
-    image: docker.io/aanno/notify_push:v0.2.1
+    image: docker.io/aanno/notify_push:v0.2.4
     restart: unless-stopped
     volumes:
       # https://github.com/nextcloud/notify_push/issues/108
@@ -103,7 +103,7 @@ services:
       # - default
 
   cron:
-    image: nextcloud:21.0.4-fpm-alpine
+    image: nextcloud:22.1.1-fpm-alpine
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z
