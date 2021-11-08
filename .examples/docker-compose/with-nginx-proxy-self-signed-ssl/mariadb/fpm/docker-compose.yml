@@ -103,7 +103,7 @@ services:
       # - default
 
   cron:
-    image: nextcloud:22.1.1-fpm-alpine
+    image: nextcloud:22.2.0-fpm-alpine
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z
