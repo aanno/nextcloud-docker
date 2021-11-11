@@ -22,6 +22,16 @@ pushd prepare
 popd
 
 podman rmi localhost/nc_web localhost/fpm_web localhost/nc_proxy localhost/fpm_proxy || true
-podman-compose -p nc -t identity --podman-run-args='--net proxy-tier' up -d
+# old way to use the private network 'proxy-tier'
+# problem: no pod created
+# podman-compose -p nc -t identity --podman-run-args='--net proxy-tier' up -d
+
+# problem: create pod but network 'proxy-tier' is NOT used, /etc/hosts is modified to contain all other container
+# (i.e. no addition of containers possible)
+# podman-compose -p nc up -d
+
+podman pod rm -f nc || true
+podman pod create -n nc
+podman-compose -t identity --podman-run-args='--pod nc --net proxy-tier' -p nc up -d
 
 popd
