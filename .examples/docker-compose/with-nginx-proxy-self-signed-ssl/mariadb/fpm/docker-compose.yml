@@ -83,7 +83,7 @@ services:
     # debug, see:
     # https://docs.nginx.com/nginx/admin-guide/monitoring/debugging/
     # https://hub.docker.com/_/nginx
-    command: [nginx-debug, '-g', 'daemon off;']
+    # command: [nginx-debug, '-g', 'daemon off;']
     ports:
       - ${SERVER_HTTP_PORT}:${SERVER_HTTP_PORT}
       - ${SERVER_HTTPS_PORT}:${SERVER_HTTPS_PORT}
