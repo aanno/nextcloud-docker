@@ -39,4 +39,4 @@ podman \
   -it \
   --volume /home/tpasch/backup:/backup:z,ro \
   --volume nc_data:/data:z \
-  nextcloud:21.0.0-fpm-alpine
+  nextcloud:23.0.0-fpm-alpine
