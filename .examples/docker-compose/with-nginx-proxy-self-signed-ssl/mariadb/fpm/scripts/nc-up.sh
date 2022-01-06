@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-set -xe
+set -x
 
 GIT_ROOT=`git rev-parse --show-toplevel`
 
@@ -32,6 +32,8 @@ podman rmi localhost/nc_web localhost/fpm_web localhost/nc_proxy localhost/fpm_p
 
 podman pod rm -f nc || true
 podman pod create -n nc
-podman-compose -t identity --podman-run-args='--pod nc --net proxy-tier' -p nc up -d
+# podman 1.0.2 changes this (tp)
+# podman-compose -t identity --podman-run-args='--pod nc --net proxy-tier' -p nc up -d
+podman-compose -p nc up -d
 
 popd
