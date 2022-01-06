@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   db:
-    image: mariadb
+    image: mariadb:10.6
     # --skip-innodb-read-only-compressed: https://github.com/nextcloud/server/issues/25436
     command: [
       "--transaction-isolation=READ-COMMITTED", "--log-bin=mysqld-bin",
