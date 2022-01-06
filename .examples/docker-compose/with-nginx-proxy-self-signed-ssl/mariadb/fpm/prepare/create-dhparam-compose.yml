@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  openssl:
+    build: ./dhparam
+    restart: "no"
+    volumes: 
+      - ${SERVER_HTTPS_CERT_VOLUME}:/certs:z
+
+volumes:
+  certs:
