@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 podman pull nextcloud:fpm-alpine
-podman pull nextcloud:27.1.1-fpm-alpine
+podman pull nextcloud:27.1.3-fpm-alpine
 podman pull nginx:alpine
 podman pull paulczar/omgwtfssl
 podman pull redis:alpine
