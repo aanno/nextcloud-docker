@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   omgwtfssl:
-    image: paulczar/omgwtfssl
+    image: docker.io/paulczar/omgwtfssl
     restart: "no"
     volumes:
       - ${SERVER_HTTPS_CERT_VOLUME}:/certs:z

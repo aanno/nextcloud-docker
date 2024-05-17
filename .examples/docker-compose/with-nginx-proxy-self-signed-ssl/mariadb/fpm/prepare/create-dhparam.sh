@@ -10,7 +10,7 @@ PNAME="nc"
 pushd "$GIT_ROOT/.examples/docker-compose/with-nginx-proxy-self-signed-ssl/mariadb/fpm"
 
 podman rm nc-openssl-1 nc_openssl_1 || true
-podman rmi nc_openssl
+podman rmi nc_openssl || true
 
 source "scripts/env.sh"
 
