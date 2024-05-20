@@ -46,6 +46,33 @@ No, nginx problem (i.e. trailing '/' at end of `proxy_pass`)!
 * Use `wget --no-check-certificate https://localhost:8443/nextcloud/index.php/apps/notify_push/test/version` for testing
 * You could try https://breitbandig.local:8443/nextcloud/push/test/cookie as well
 
+### mariadb user
+
+You need mariadb users that can access mariadb server from another host. This is _not_ 
+supported my the docker image or the nextcloud initial installation screen. 
+Hence you need to create the nextcloud user on your own before.
+
+```bash
+podman exec -it nc_db_1 mysql
+```
+
+```bash
+create database nextcloud;
+CREATE USER 'nextcloud'@'10.89.%' IDENTIFIED BY 'secret';
+GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'10.89.%';
+FLUSH PRIVILEGES;
+select user, host from mysql.user;
+```
+
+Obsolete:
+
+```bash
+CREATE USER 'root'@'10.89.%' IDENTIFIED BY 'mysecret';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'10.89.%';
+FLUSH PRIVILEGES;
+select user, host from mysql.user;
+```
+
 ## Known issues
 
 * [extreme slowdown](https://github.com/nextcloud/richdocuments/issues/1282) <br/>
@@ -58,7 +85,7 @@ No, nginx problem (i.e. trailing '/' at end of `proxy_pass`)!
 ## TODOs
 
 * [server to client push](https://github.com/nextcloud/notify_push) DONE!
-* [certbot](https://certbot.eff.org/docs/using.html) (not integraded, incomplete)
+* [certbot](https://certbot.eff.org/docs/using.html) (not integrated, incomplete)
   + https://certbot.eff.org/docs/install.html#running-with-docker
   + https://certbot.eff.org/docs/ciphers.html#weakdh-logjam
 * [use standardized 'Forward' header](https://www.nginx.com/resources/wiki/start/topics/examples/forwarded/)
