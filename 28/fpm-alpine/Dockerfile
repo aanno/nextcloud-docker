@@ -1,5 +1,5 @@
 # DO NOT EDIT: created by update.sh from Dockerfile-alpine.template
-FROM php:8.2-fpm-alpine3.19
+FROM php:8.2-fpm-alpine3.18
 
 # entrypoint.sh and cron.sh dependencies
 RUN set -ex; \
@@ -36,13 +36,11 @@ RUN set -ex; \
         postgresql-dev \
     ; \
     \
-    docker-php-ext-configure ftp --with-openssl-dir=/usr; \
     docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp; \
     docker-php-ext-configure ldap; \
     docker-php-ext-install -j "$(nproc)" \
         bcmath \
         exif \
-        ftp \
         gd \
         gmp \
         intl \
