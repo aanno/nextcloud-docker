@@ -24,7 +24,7 @@ No, nginx problem (i.e. trailing '/' at end of `proxy_pass`)!
 * Edit `config/config.php` to include the name(s) in the array of `trusted_domains`:
   ```php
     // TODO tp: This is ways to much but 'nc_web_1' does not work...
-    'trusted_proxies' => ['10.88.2.0/24'],
+    'trusted_proxies' => ['10.89.2.0/24'],
     'trusted_domains' => 
   array (
     0 => 'localhost:8443',

@@ -144,6 +144,11 @@ volumes:
 # https://stackoverflow.com/questions/38088279/communication-between-multiple-docker-compose-projects
 # https://docs.docker.com/compose/networking/
 networks:
+    # create with:
+    # podman network create proxy-tier --subnet 10.89.2.0/24
+    # if you use another subnet: 
+    # - change DNS_RESOLVER_IP
+    # - change nginx.conf (done automatically)
     proxy-tier:
         external: true
         name: proxy-tier
