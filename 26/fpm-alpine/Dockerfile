@@ -54,10 +54,10 @@ RUN set -ex; \
     ; \
     \
 # pecl will claim success even if one install fails, so we need to perform each install separately
-    pecl install APCu-5.1.22; \
+    pecl install APCu-5.1.23; \
     pecl install imagick-3.7.0; \
     pecl install memcached-3.2.0; \
-    pecl install redis-6.0.1; \
+    pecl install redis-6.0.2; \
     \
     docker-php-ext-enable \
         apcu \
@@ -111,7 +111,7 @@ RUN { \
 VOLUME /var/www/html
 
 
-ENV NEXTCLOUD_VERSION 26.0.7
+ENV NEXTCLOUD_VERSION 26.0.13
 
 RUN set -ex; \
     apk add --no-cache --virtual .fetch-deps \
@@ -119,8 +119,8 @@ RUN set -ex; \
         gnupg \
     ; \
     \
-    curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/nextcloud-26.0.7.tar.bz2"; \
-    curl -fsSL -o nextcloud.tar.bz2.asc "https://download.nextcloud.com/server/releases/nextcloud-26.0.7.tar.bz2.asc"; \
+    curl -fsSL -o nextcloud.tar.bz2 "https://download.nextcloud.com/server/releases/nextcloud-26.0.13.tar.bz2"; \
+    curl -fsSL -o nextcloud.tar.bz2.asc "https://download.nextcloud.com/server/releases/nextcloud-26.0.13.tar.bz2.asc"; \
     export GNUPGHOME="$(mktemp -d)"; \
 # gpg key from https://nextcloud.com/nextcloud.asc
     gpg --batch --keyserver keyserver.ubuntu.com  --recv-keys 28806A878AE423A28372792ED75899B9A724937A; \
