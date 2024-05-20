@@ -16,7 +16,8 @@ NC_ROOT=/var/www/html
 # mkdir /var/www/html/apps/theming/theme
 # ln /var/www/html/apps/theming/css/*.css /var/www/html/apps/theming/theme/
 #
-ln -s /var/www/html/core/img $NC_ROOT/apps/theming/img/core || true
+# ln -s /var/www/html/core/img $NC_ROOT/apps/theming/img/core || true
+ln -s /var/www/html/apps/theming/css /var/www/html/apps/theming/theme || true
 
 if [ -n "$NEXTCLOUD_DATA_DIR" ]; then
     DATA="$NEXTCLOUD_DATA_DIR"
