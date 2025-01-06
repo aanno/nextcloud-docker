@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 podman pull docker.io/nextcloud:fpm-alpine
-podman pull docker.io/nextcloud:28.0.14-fpm-alpine
+podman pull docker.io/nextcloud:29.0.10-fpm-alpine
 podman pull docker.io/nginx:alpine
 podman pull docker.io/paulczar/omgwtfssl
 podman pull docker.io/redis:alpine
