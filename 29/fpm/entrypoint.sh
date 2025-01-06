@@ -24,17 +24,17 @@ run_path() {
     local hook_folder_path="/docker-entrypoint-hooks.d/$1"
     local return_code=0
 
-    if ! [ -d "${hook_folder_path}" ]; then
-        echo "=> Skipping the folder \"${hook_folder_path}\", because it doesn't exist"
+    echo "=> Searching for scripts (*.sh) to run, located in the folder: ${hook_folder_path}"
+
+    if [ -z "$(ls -A "${hook_folder_path}")" ]; then
+      echo "==> but the hook folder \"$(basename "${hook_folder_path}")\" is empty, so nothing to do"
         return 0
     fi
 
-    echo "=> Searching for scripts (*.sh) to run, located in the folder: ${hook_folder_path}"
-
     (
-        find "${hook_folder_path}" -maxdepth 1 -iname '*.sh' '(' -type f -o -type l ')' -print | sort | while read -r script_file_path; do
-            if ! [ -x "${script_file_path}" ]; then
-                echo "==> The script \"${script_file_path}\" was skipped, because it didn't have the executable flag"
+        for script_file_path in "${hook_folder_path}/"*.sh; do
+            if ! [ -x "${script_file_path}" ] && [ -f "${script_file_path}" ]; then
+                echo "==> The script \"${script_file_path}\" in the folder \"${hook_folder_path}\" was skipping, because it didn't have the executable flag"
                 continue
             fi
 

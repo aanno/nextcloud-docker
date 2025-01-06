@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  omgwtfssl:
+    image: docker.io/paulczar/omgwtfssl
+    restart: "no"
+    volumes:
+      - ${SERVER_HTTPS_CERT_VOLUME}:/certs:z
+    # https://github.com/paulczar/omgwtfssl
+    environment:
+      SSL_SUBJECT: ${CERTBOT_PRIMARY_DOMAIN}
+      SSL_DNS: ${SERVER_DOMAINS_COMMA}
+      SSL_EXPIRE: 366
+    # networks:
+    #   - proxy-tier
+
+volumes:
+  certs:
