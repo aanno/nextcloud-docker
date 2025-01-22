@@ -25,9 +25,11 @@ services:
       - proxy-tier
 
   app:
-    # image: nextcloud:fpm-alpine
-    build: ./nc
+    image: docker.io/nextcloud:30.0.4-apache
+    # build: ./nc
     restart: unless-stopped
+    ports:
+      - 8088:80
     volumes:
       - nextcloud:/var/www/html
       # - nc_data:/data:z
@@ -105,7 +107,7 @@ services:
       # - default
 
   cron:
-    image: docker.io/nextcloud:30.0.4-fpm-alpine
+    image: docker.io/nextcloud:30.0.4-apache
     restart: unless-stopped
     volumes:
       - nextcloud:/var/www/html:z

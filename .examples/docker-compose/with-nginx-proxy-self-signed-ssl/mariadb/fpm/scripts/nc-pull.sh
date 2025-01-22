@@ -2,6 +2,7 @@
 
 podman pull docker.io/nextcloud:fpm-alpine
 podman pull docker.io/nextcloud:30.0.4-fpm-alpine
+podman pull docker.io/nextcloud:30.0.4-apache
 podman pull docker.io/nginx:alpine
 podman pull docker.io/paulczar/omgwtfssl
 podman pull docker.io/redis:alpine
