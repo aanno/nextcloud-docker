@@ -1,4 +1,30 @@
 {
+  "35": {
+    "branch": "35",
+    "version": "35.0.0",
+    "url": "https://download.nextcloud.com/server/releases/nextcloud-35.0.0.tar.bz2",
+    "ascUrl": "https://download.nextcloud.com/server/releases/nextcloud-35.0.0.tar.bz2.asc",
+    "variants": {
+      "apache": {
+        "variant": "apache",
+        "base": "debian",
+        "baseVersion": "bookworm",
+        "phpVersion": "8.2"
+      },
+      "fpm": {
+        "variant": "fpm",
+        "base": "debian",
+        "baseVersion": "bookworm",
+        "phpVersion": "8.2"
+      },
+      "fpm-alpine": {
+        "variant": "fpm-alpine",
+        "base": "alpine",
+        "baseVersion": "3.18",
+        "phpVersion": "8.2"
+      }
+    }
+  },
   "34": {
     "branch": "34",
     "version": "34.0.4",
